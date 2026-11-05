@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<!-- Cricket Auction · Made by Vidhan Shah -->
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="author" content="Vidhan Shah">
+<title>Cricket Auction – Made by Vidhan Shah</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--ink:#14213d;--mut:#5f6b85;--line:#e0d2b4;--pri:#1e40af;--acc:#c9a66b;--ok:#1e3a8a;--bad:#b91c1c;--bg:#f5ecd9;--card:#fffaf0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.4}
+.wrap{max-width:760px;margin:0 auto;padding:16px}
+h1{font-size:26px;margin:4px 0}h2{font-size:18px;margin:0 0 10px}
+.sub{color:var(--mut);margin:0 0 16px;font-size:14px}
+.card{border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px;box-shadow:0 2px 10px rgba(30,58,138,.08);background:var(--card)}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.seg button,.btn{font:inherit;border:1.5px solid var(--line);background:var(--card);border-radius:12px;padding:10px 14px;cursor:pointer;font-weight:600;color:var(--ink)}
+.seg button.on{border-color:var(--pri);background:#dbe6fb;color:var(--pri)}
+.btn.p{background:var(--pri);border-color:var(--pri);color:#fff}
+.btn.g{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn.r{background:var(--card);border-color:var(--bad);color:var(--bad)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+input,select{font:inherit;padding:10px;border:1.5px solid var(--line);border-radius:10px;width:100%;color:var(--ink);background:var(--card)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+label{font-weight:600;font-size:14px;display:block;margin-bottom:6px}
+.note{font-size:13px;color:var(--mut);margin-top:8px}
+.err{color:var(--bad);font-size:13px;margin-top:8px;font-weight:600}
+.steps{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto}
+.chip{padding:6px 10px;border-radius:99px;background:#ebdfc4;font-size:12px;font-weight:700;white-space:nowrap;color:var(--mut)}
+.chip.on{background:var(--pri);color:#fff}.chip.done{background:#dbe6fb;color:var(--ok)}
+.pl{display:flex;gap:14px;align-items:center}
+.pl img{width:110px;height:110px;border-radius:18px;border:1px solid var(--line);flex:none}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px;margin-right:4px}
+.t-A{background:#dbe6fb;color:#1e3a8a}.t-R{background:#efe0bf;color:#7a5a24}.t-r{background:#c7d6f5;color:#1e40af}
+.price{font-size:34px;font-weight:800;color:var(--pri)}
+.tb{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:10px}
+.tb button{padding:10px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);font:inherit;font-weight:700;cursor:pointer;text-align:left}
+.tb button small{display:block;font-weight:500;color:var(--mut)}
+.tb button.lead{border-color:var(--pri);background:#dbe6fb}
+.tb button:disabled{opacity:.4;cursor:not-allowed}
+.row{display:flex;gap:8px;margin-top:12px}.row .btn{flex:1}
+.lb{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.rk{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:#ebdfc4;flex:none}
+.r1{background:#c9a66b}.r2{background:#c7d6f5}.r3{background:#e3cfa5}
+.sq{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.sq div{text-align:center;font-size:11px;line-height:1.25;width:76px;color:var(--mut)}.sq b{display:block;color:var(--ink);font-weight:700}.sq img{width:62px;height:62px;border-radius:12px;border:1px solid var(--line);display:block;margin:0 auto 3px}
+.sq .bn{opacity:.6}
+.log{font-size:13px;color:var(--mut);max-height:90px;overflow:auto;margin-top:10px}
+</style></head><body><div class="wrap" id="app"></div><footer style="text-align:center;color:#5f6b85;font-size:13px;padding:8px 16px 24px">Made by <b style="color:#14213d">Vidhan Shah</b></footer>
+<script>
+const P={
+BAT:[["Virat Kohli","IND",96,"A"],["Rohit Sharma","IND",93,"A"],["Shubman Gill","IND",90,"A"],["Joe Root","ENG",94,"A"],["Steve Smith","AUS",92,"A"],["Kane Williamson","NZ",91,"A"],["Babar Azam","PAK",90,"A"],["Travis Head","AUS",89,"A"],["Yashasvi Jaiswal","IND",89,"A"],["Suryakumar Yadav","IND",91,"A"],["Chris Gayle","WI",92,"R"],["AB de Villiers","SA",96,"R"],["Hashim Amla","SA",88,"R"],["Suresh Raina","IND",85,"R"],["Gautam Gambhir","IND",84,"R"],["Cheteshwar Pujara","IND",83,"R"],["Yuvraj Singh","IND",88,"R"],["David Warner","AUS",90,"R"],["Brendon McCullum","NZ",86,"R"],["Tilak Varma","IND",82,"A"]],
+WK:[["Rishabh Pant","IND",90,"A"],["Jos Buttler","ENG",91,"A"],["Heinrich Klaasen","SA",89,"A"],["Quinton de Kock","SA",88,"A"],["MS Dhoni","IND",95,"R"],["Kumar Sangakkara","SL",92,"R"],["Nicholas Pooran","WI",86,"A"],["KL Rahul","IND",87,"A"],["Mohammad Rizwan","PAK",85,"A"],["Sanju Samson","IND",86,"A"],["Ishan Kishan","IND",83,"A"],["Phil Salt","ENG",85,"A"]],
+AR:[["Hardik Pandya","IND",90,"A"],["Ravindra Jadeja","IND",91,"A"],["Ben Stokes","ENG",92,"A"],["Glenn Maxwell","AUS",87,"A"],["Shakib Al Hasan","BAN",88,"A"],["Marcus Stoinis","AUS",84,"A"],["Andre Russell","WI",88,"A"],["Mitchell Marsh","AUS",85,"A"],["Shane Watson","AUS",87,"R"],["Dwayne Bravo","WI",85,"R"],["Ravichandran Ashwin","IND",89,"R"],["Moeen Ali","ENG",83,"R"],["Axar Patel","IND",84,"A"],["Sunil Narine","WI",88,"A"],["Marco Jansen","SA",85,"A"],["Sam Curran","ENG",84,"A"],["Mitchell Santner","NZ",83,"A"],["Washington Sundar","IND",82,"A"]],
+BOWL:[["Jasprit Bumrah","IND",97,"A"],["Mitchell Starc","AUS",92,"A"],["Pat Cummins","AUS",93,"A"],["Rashid Khan","AFG",93,"A"],["Kagiso Rabada","SA",91,"A"],["Trent Boult","NZ",90,"A"],["Shaheen Afridi","PAK",90,"A"],["Mohammed Shami","IND",89,"A"],["Kuldeep Yadav","IND",88,"A"],["Jofra Archer","ENG",87,"A"],["Josh Hazlewood","AUS",89,"A"],["Mohammed Siraj","IND",87,"A"],["Dale Steyn","SA",94,"R"],["Lasith Malinga","SL",91,"R"],["James Anderson","ENG",90,"R"],["Stuart Broad","ENG",88,"R"],["Tim Southee","NZ",86,"R"],["Mohammad Amir","PAK",84,"R"],["Anrich Nortje","SA",85,"A"],["Matheesha Pathirana","SL",84,"A"]]};
+const RN={BAT:"Batsmen",WK:"Wicketkeepers",AR:"All-rounders",BOWL:"Bowlers"},PLAY={BAT:2,BOWL:2,AR:2,WK:1},BENCH=["BAT","BOWL","AR","WK"],PX=["BAT","BOWL","AR","BOWL"];
+const JC={IND:"#1d4ed8",AUS:"#eab308",ENG:"#c8102e",SA:"#15803d",NZ:"#111827",PAK:"#166534",WI:"#7f1d1d",SL:"#1e3a8a",BAN:"#059669",AFG:"#2563eb"};
+const SK=["#f1c8a5","#d9a577","#b97d52","#8d5a3a"];
+const $=s=>document.getElementById(s),sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){let j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const hs=s=>[...s].reduce((a,c)=>(a*31+c.charCodeAt(0))>>>0,7);
+const fm=n=>"₹"+(+n).toFixed(2).replace(/\.?0+$/,"")+" Cr";
+function av(n,c){const h=hs(n),sk=SK[h%4],hair=["#1f2937","#3b2a1a","#111"][h%3],jc=JC[c]||"#334155",bg=["#dbe6fb","#efe0bf","#c7d6f5","#f3e8cf"][h%4],ini=n.split(" ").map(w=>w[0]).slice(0,2).join("");
+const s=`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='${bg}'/><path d='M12 100Q14 68 50 66Q86 68 88 100Z' fill='${jc}'/><path d='M40 66L50 78L60 66Z' fill='#fff'/><rect x='43' y='54' width='14' height='14' fill='${sk}'/><ellipse cx='50' cy='40' rx='16' ry='19' fill='${sk}'/><path d='M33 38Q34 18 50 19Q66 18 67 38Q60 28 50 29Q40 28 33 38Z' fill='${hair}'/><circle cx='44' cy='42' r='1.8' fill='#222'/><circle cx='56' cy='42' r='1.8' fill='#222'/><path d='M44 51Q50 55 56 51' stroke='#7a3b24' stroke-width='1.6' fill='none'/><text x='50' y='93' font-size='11' font-weight='700' text-anchor='middle' fill='#fff' font-family='sans-serif'>${ini}</text></svg>`;
+return "data:image/svg+xml;utf8,"+encodeURIComponent(s)}
+let S={type:"T20",n:4,names:["Mumbai Mavericks","Delhi Dynamos","Chennai Chargers","Kolkata Knights","Team 5","Team 6"],base:true,size:10,bench:true},G=null,warn="";
+const PURSE={T20:100,ODI:120,Test:90},MULT={T20:{AR:1.1},ODI:{},Test:{BOWL:1.1}};
+const BN=()=>S.bench?1:0,B4=()=>S.bench?4:0;
+function needs(r){let n=PLAY[r]+BN();for(let i=0;i<S.size-7;i++)if(PX[i]==r)n++;return n}
+function setup(){if(SV){Object.assign(S,SV);SV=null}
+$("app").innerHTML=`<h1>🏏 Cricket Auction</h1><p class="sub">Set up your session, then bid for legends and current stars. <button class="btn" style="padding:4px 10px;font-size:12px" onclick="logout()">Log out (${ME||""})</button></p>
+<div class="card"><label>1. Type of match</label><div class="seg">${["T20","ODI","Test"].map(t=>`<button class="${S.type==t?"on":""}" onclick="S.type='${t}';setup()">${t}</button>`).join("")}</div><div class="note">Purse per team: ${PURSE[S.type]} Cr. ${S.type=="T20"?"All-rounders get a 10% score boost.":S.type=="Test"?"Bowlers get a 10% score boost.":"Neutral scoring."}</div></div>
+<div class="card"><label>2. Number of teams &amp; names</label><select onchange="S.n=+this.value;setup()">${[2,3,4,5,6].map(n=>`<option ${S.n==n?"selected":""}>${n}</option>`).join("")}</select>
+<div class="grid" style="margin-top:10px">${Array.from({length:S.n},(_,i)=>`<input value="${S.names[i]}" oninput="S.names[${i}]=this.value" placeholder="Team ${i+1}">`).join("")}</div></div>
+<div class="card"><label>3. Base price</label><div class="seg"><button class="${S.base?"on":""}" onclick="S.base=true;setup()">Yes – by player grade</button><button class="${!S.base?"on":""}" onclick="S.base=false;setup()">No – open at ₹0.2 Cr</button></div></div>
+<div class="card"><label>4. Playing team size (min 7, max 11)</label><input type="number" min="7" max="11" value="${S.size}" oninput="S.size=Math.min(11,Math.max(7,Math.round(+this.value)||7))" onchange="S.size=Math.min(11,Math.max(7,Math.round(+this.value)||7));setup()">
+<div class="note">Core playing 7 = 2 Batsmen, 2 Bowlers, 2 All-rounders, 1 Wicketkeeper. Playing team: ${S.size}${S.size>7?" (extra: "+PX.slice(0,S.size-7).map(r=>RN[r]).join(", ")+")":""}. ${S.bench?"Plus 4 bench players: 1 Batsman, 1 Bowler, 1 All-rounder, 1 Wicketkeeper.":"No bench players."} Each team must buy ${S.size+B4()} players in total; unsold players return for another round until squads are full.</div></div>
+<div class="card"><label>5. Take 4 bench players?</label><div class="seg"><button class="${S.bench?"on":""}" onclick="S.bench=true;setup()">Yes – 1 Bat, 1 Bowl, 1 AR, 1 WK</button><button class="${!S.bench?"on":""}" onclick="S.bench=false;setup()">No bench</button></div></div>
+<div class="err">${warn}</div><button class="btn p" style="width:100%;font-size:17px;margin-top:8px" onclick="start()">Start Auction</button>${saved()}`}
+function go(){
+const names=S.names.slice(0,S.n).map((x,i)=>x.trim()||"Team "+(i+1));
+for(const r of Object.keys(PLAY))if(S.n*needs(r)>P[r].length){warn=`Not enough ${RN[r]} for ${S.n} teams of ${S.size}. Reduce teams or squad size.`;return setup()}
+warn="";
+const order=sh(Object.keys(PLAY)),q=[];order.forEach(r=>sh(P[r]).forEach(p=>q.push({n:p[0],c:p[1],rt:p[2],st:p[3],r})));
+G={order,all:q.slice(),amt:0,q,i:0,teams:names.map(n=>({n,purse:PURSE[S.type],sq:[]})),cur:0,lead:null,log:[]};G.cur=base(q[0]);auc()}
+function base(p){return S.base?(p.rt>=93?2:p.rt>=88?1:0.5):0.2}
+const inc=x=>x<5?0.25:0.5;
+function ok(t,p,bid){const have=t.sq.filter(x=>x.r==p.r).length;if(have>=needs(p.r))return false;const left=S.size+B4()-t.sq.length;return t.purse>=bid+0.2*(left-1)-1e-9}
+function auc(){
+if(G.teams.every(t=>t.sq.length>=S.size+B4()))return result();
+if(G.i>=G.q.length){const sd=new Set(G.teams.flatMap(t=>t.sq.map(x=>x.n))),rem=sh(G.all.filter(p=>!sd.has(p.n))).filter(p=>G.teams.some(t=>ok(t,p,base(p))));if(!rem.length)return result();G.q=rem;G.i=0;G.lead=null;G.cur=base(rem[0]);G.re=1;G.log.push("🔁 Unsold players return – squads must be completed")}
+const p=G.q[G.i],b=base(p);if(!(G.amt>=(G.lead==null?b:+(G.cur+0.1).toFixed(2))))G.amt=G.lead==null?b:+(G.cur+0.1).toFixed(2);const bid=G.lead==null?b:+(G.cur+0.1).toFixed(2),si=G.order.indexOf(p.r);
+$("app").innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center"><h1>🏏 ${S.type} Auction</h1><button class="btn" onclick="if(confirm('Go back to the home/settings page? The current auction will be lost.'))setup()">🏠 Home</button></div>
+<div class="steps">${G.order.map((r,k)=>`<span class="chip ${k==si?"on":k<si?"done":""}">${RN[r]}</span>`).join("")}</div>
+<div class="card"><div class="pl"><img src="${av(p.n,p.c)}" alt="${p.n}"><div><div style="font-size:22px;font-weight:800">${p.n}</div><div class="note" style="margin:2px 0 6px">${p.c} · ${RN[p.r].replace(/s$/,"")} · Rating ${(p.rt/10).toFixed(1)}/10</div><span class="tag t-${p.st}">${p.st=="A"?"Playing":"Retired legend"}</span><span class="tag t-r">Lot ${G.i+1}/${G.q.length}</span></div></div>
+<div style="margin-top:14px" class="note">${G.lead==null?"Base price":"Current bid"}</div><div class="price">${fm(G.lead==null?b:G.cur)}</div>
+<div class="note">${G.lead==null?"No bids yet":"Leading: <b>"+G.teams[G.lead].n+"</b>"}</div>
+<div class="note" style="margin-top:12px">Your bid (min ${fm(bid)}) – raise as much as you like:</div><div class="seg" style="margin-top:6px"><input id="amt" type="number" step="0.05" min="${bid}" value="${G.amt}" style="width:120px" oninput="G.amt=+this.value">${[0.25,0.5,1,2].map(x=>`<button onclick="G.amt=+(G.amt+${x}).toFixed(2);auc()">+${x}</button>`).join("")}</div><div class="tb">${G.teams.map((t,k)=>`<button class="${G.lead==k?"lead":""}" ${(G.lead==k||!ok(t,p,bid))?"disabled":""} onclick="bidBy(${k})">${t.n}<small>Tap to bid · purse ${fm(t.purse)}</small><small>${t.sq.length}/${S.size+B4()} players</small></button>`).join("")}</div>
+<div class="row"><button class="btn g" ${G.lead==null?"disabled":""} onclick="sold()">🔨 Sold</button><button class="btn r" ${G.re?"disabled":""} onclick="unsold()">Unsold</button></div><button class="btn" style="width:100%;margin-top:8px" onclick="if(confirm('End the game now and see the leaderboard?'))result()">🏁 End game &amp; show leaderboard</button>
+<div class="log">${G.log.slice(-6).reverse().join("<br>")}</div></div>
+<div class="card"><h2>Squads</h2>${G.teams.map(t=>`<div style="margin-bottom:14px"><b>${t.n}</b> <span class="note">${t.sq.length}/${S.size+B4()} · ${fm(t.purse)} left</span><div class="sq">${t.sq.map(p=>`<div><img src="${av(p.n,p.c)}"><b>${p.n}</b>${fm(p.price)}</div>`).join("")}</div></div>`).join("")}</div>`}
+function bidBy(k){const p=G.q[G.i],min=G.lead==null?base(p):+(G.cur+0.1).toFixed(2),a=+G.amt;if(!(a>=min))return alert("Minimum bid is "+fm(min));if(!ok(G.teams[k],p,a))return alert(G.teams[k].n+" can't afford this (must keep ₹0.2 Cr per remaining slot).");G.cur=a;G.lead=k;auc()}
+function sold(){const p=G.q[G.i],t=G.teams[G.lead];t.purse-=G.cur;t.sq.push({...p,price:G.cur});G.log.push(`✅ ${p.n} → ${t.n} for ${fm(G.cur)}`);next()}
+function unsold(){G.log.push(`❌ ${G.q[G.i].n} unsold`);next()}
+function next(){G.i++;G.lead=null;G.amt=0;if(G.q[G.i])G.cur=base(G.q[G.i]);auc()}
+function split(t){const pl=[],bn=[];Object.keys(PLAY).forEach(r=>{const a=t.sq.filter(x=>x.r==r).sort((a,b)=>b.rt-a.rt);pl.push(...a.slice(0,needs(r)-BN()));bn.push(...a.slice(needs(r)-BN()))});return[pl,bn]}
+function score(t){const[pl,bn]=split(t),m=MULT[S.type];return pl.reduce((s,p)=>s+p.rt*(m[p.r]||1),0)+0.5*bn.reduce((s,p)=>s+p.rt,0)}
+let MEM=[],DBD=null,PERSIST=false;try{localStorage.setItem("ca_t","1");localStorage.removeItem("ca_t");PERSIST=true}catch(e){}
+const LS={g(){try{const v=localStorage.getItem("ca_s");if(v)return JSON.parse(v)}catch(e){}return MEM.slice()},s(a){MEM=a.slice();try{localStorage.setItem("ca_s",JSON.stringify(a))}catch(e){}try{DBD&&DBD.set({v:JSON.stringify(a)}).catch(()=>{})}catch(e){}}};let SV=null;
+async function dbInit(){}
+dbInit();
+function none(){$("app").innerHTML=`<h1>🏁 Auction ended</h1><div class="card" style="text-align:center"><div style="font-size:42px">🤷</div><b style="font-size:20px">No winner</b><div class="note">No team bought any player, so there is no leaderboard and nothing was saved.</div></div><div class="row"><button class="btn p" onclick="start()">Start again</button><button class="btn" onclick="setup()">Home</button></div>`}
+function saveS(){let n=LS.g().length+1;try{n=Math.max(n,(+localStorage.getItem("ca_n")||0)+1);localStorage.setItem("ca_n",n)}catch(e){}const a=LS.g(),id=Date.now();a.unshift({id,name:"Session "+n,d:new Date().toLocaleDateString(),type:S.type,size:S.size,teams:G.teams});LS.s(a);return id}
+function saved(){const a=LS.g();if(!a.length)return"";return`<div class="card" style="margin-top:16px"><h2>📁 Saved sessions</h2>${a.map(s=>`<div class="lb"><div style="flex:1"><b>${s.name}</b><div class="note" style="margin:0">${s.type} · ${s.d} · ${s.teams.length} teams</div></div><button class="btn" onclick="openS(${s.id})">View</button><button class="btn" onclick="ren(${s.id},1)">✏️</button><button class="btn r" onclick="delS(${s.id})">🗑</button></div>`).join("")}</div>`}
+function openS(id){const s=LS.g().find(x=>x.id==id);if(!s)return;SV={type:S.type,size:S.size};S.type=s.type;S.size=s.size;G={teams:s.teams,saved:1,sid:id};result(id)}
+function ren(id,h){const a=LS.g(),s=a.find(x=>x.id==id);if(!s)return;const v=prompt("Rename session",s.name);if(v&&v.trim()){s.name=v.trim().slice(0,40);LS.s(a)}h?setup():result(id)}
+function delS(id){if(confirm("Delete this saved session?")){LS.s(LS.g().filter(x=>x.id!=id));setup()}}
+const SL={BAT:"Bat",BOWL:"Bowl",AR:"AR",WK:"WK"};const mx=r=>{const m=(MULT[S.type]||{})[r]||1;return(needs(r)-BN())*100*m+(BN()?50:0)},T10=s=>(s/["BAT","BOWL","AR","WK"].reduce((a,r)=>a+mx(r),0)*10).toFixed(1),R10=(t,r)=>(sec(t,r)/mx(r)*10).toFixed(1);
+function sec(t,r){const[pl,bn]=split(t),m=(MULT[S.type]||{})[r]||1;return pl.filter(p=>p.r==r).reduce((s,p)=>s+p.rt*m,0)+0.5*bn.filter(p=>p.r==r).reduce((s,p)=>s+p.rt,0)}
+function secs(L){return`<div class="card"><h2>🎯 Section winners</h2><div class="note" style="margin:-6px 0 12px">Marks are out of 10: 10 would mean the best possible players in that section (bench counts half).</div>${["BAT","BOWL","AR","WK"].map(r=>{const o=L.map(x=>({n:x.t.n,s:sec(x.t,r)})).sort((a,b)=>b.s-a.s);return`<div style="margin-bottom:12px"><b>${RN[r]}</b> ${o[0].s>0?`<span class="tag t-R">🥇 ${o[0].n}</span>`:'<span class="tag t-r">No winner</span>'}<div class="note" style="margin:2px 0 0">${o.map(y=>`${y.n} <b>${(y.s/mx(r)*10).toFixed(1)}</b>`).join(" · ")}</div></div>`}).join("")}</div>`}
+function result(sid){
+const L=G.teams.map(t=>({t,s:score(t)})).sort((a,b)=>b.s-a.s);if(!G.teams.some(t=>t.sq.length))return none();if(!sid&&!G.saved){G.saved=1;sid=saveS()}G.sid=sid;
+$("app").innerHTML=`<h1>🏆 Final Leaderboard</h1><div class="note" style="display:flex;align-items:center;gap:8px;margin:0 0 10px">📁 <b style="color:var(--ink)">${(LS.g().find(x=>x.id==G.sid)||{name:"Session"}).name}</b> (${PERSIST||DBD?"saved":"saved for this visit only"}) <button class="btn" style="padding:4px 10px" onclick="ren(${G.sid})">✏️ Rename</button></div><div class="card" style="text-align:center;background:#efe0bf;border-color:#c9a66b"><div class="note" style="margin:0">Best team of the auction</div><div style="font-size:24px;font-weight:800">👑 ${L[0].t.n}</div><div class="note" style="margin:0">Team rating ${T10(L[0].s)}/10</div></div>${secs(L)}<p class="sub">Team rating out of 10, built from player ratings (each player is rated out of 10). Playing team counts in full, bench at half. Missing roles score zero.</p>
+${L.map((x,i)=>{const[pl,bn]=split(x.t),sp=PURSE[S.type]-x.t.purse,im=p=>`<div class="${bn.includes(p)?"bn":""}"><img src="${av(p.n,p.c)}"><b>${p.n}</b>${p.c} · ${p.r}</div>`;
+return`<div class="card"><div class="lb" style="border:0;padding:0"><div class="rk r${i+1}">${i+1}</div><div style="flex:1"><b style="font-size:17px">${x.t.n}</b> ${i==0?'<span class="tag t-R">👑 Best Team</span>':i==L.length-1&&L.length>1?'<span class="tag t-r">Last</span>':''}<div class="note" style="margin:0">Spent ${fm(sp)} · ${x.t.sq.length} players</div><div class="note" style="margin:2px 0 0">${["BAT","BOWL","AR","WK"].map(r=>SL[r]+" "+R10(x.t,r)).join(" · ")}</div></div><div style="font-size:22px;font-weight:800;color:var(--pri)">${T10(x.s)}<small style="font-size:12px;color:var(--mut)">/10</small></div></div>
+<div class="sq">${pl.map(im).join("")}${bn.map(im).join("")}</div><div class="note">Faded = bench</div></div>`}).join("")}
+<div class="row"><button class="btn p" onclick="if(SV){Object.assign(S,SV);SV=null}start()">Play again (new order)</button><button class="btn" onclick="setup()">Change settings</button></div>`}
+/* ===== ONLINE DATABASE (Firebase Realtime Database) – paste your database address below ===== */
+const FB="https://cricketauction-b53e0-default-rtdb.firebaseio.com";
+const FBU=p=>FB.replace(/\/$/,"")+"/"+p+".json";
+const jf=async(p,m,b)=>{const r=await fetch(FBU(p),{method:m||"GET",body:b==null?undefined:JSON.stringify(b)});if(!r.ok)throw{code:"http_"+r.status};return r.json()};
+const sn1=(id,v)=>({id,exists:v!=null,data:()=>v==null?undefined:v});
+const poll=(fn,next,err)=>{let on=1,last=null;const tick=async()=>{if(!on)return;try{const v=await fn(),j=JSON.stringify(v);if(j!==last){last=j;next(v)}}catch(e){err&&err(e)}if(on)setTimeout(tick,2000)};tick();return()=>{on=0}};
+const DBO=/^https:\/\//.test(FB)?{
+doc:p=>{const id=p.split("/").pop();return{id,get:async()=>sn1(id,await jf(p)),set:d=>jf(p,"PUT",d),update:d=>jf(p,"PATCH",d),delete:()=>jf(p,"DELETE"),onSnapshot:(n,e)=>poll(()=>jf(p),v=>n(sn1(id,v)),e)}},
+collection:p=>({onSnapshot:(n,e)=>poll(()=>jf(p),v=>n({docs:Object.entries(v||{}).map(([k,x])=>sn1(k,x))}),e)})}:null;
+let ME=null,OWN=0,LOC=0,AM="login",CUR=null,TR=0;try{ME=sessionStorage.getItem("ca_me");OWN=+sessionStorage.getItem("ca_own")||0;LOC=+sessionStorage.getItem("ca_loc")||0}catch(e){}
+const OWNER="vidhan",OS="a7f3",OH="02e2597c906e7950bc981f60a9d4c5f58e2591cdb9ad124b8b3a3e244365b5c9",DBP=Promise.resolve(DBO);
+const DBT=()=>DBP;let MLU={};const LU=a=>{if(a){MLU=a;try{localStorage.setItem("ca_lu",JSON.stringify(a))}catch(e){}return}try{return JSON.parse(localStorage.getItem("ca_lu")||"{}")}catch(e){return MLU}};
+const sha=async t=>[...new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t)))].map(b=>b.toString(16).padStart(2,"0")).join("");
+const sess=()=>{try{sessionStorage.setItem("ca_me",ME||"");sessionStorage.setItem("ca_own",OWN);sessionStorage.setItem("ca_loc",LOC)}catch(e){}};
+function loginUI(m){$("app").innerHTML=`<h1>🏏 Cricket Auction</h1><p class="sub">Log in to play.</p><div class="card"><div class="seg"><button class="${AM=="login"?"on":""}" onclick="AM='login';loginUI()">Login</button><button class="${AM=="reg"?"on":""}" onclick="AM='reg';loginUI()">Register</button></div><label style="margin-top:12px">Username</label><input id="lu" autocapitalize="none"><label style="margin-top:10px">Password</label><input id="lp" type="password"><div class="err">${m||""}</div><button class="btn p" style="width:100%;margin-top:10px" onclick="doAuth()">${AM=="login"?"Login":"Create account"}</button></div>`}
+async function doAuth(){const u=$("lu").value.trim().toLowerCase(),p=$("lp").value;if(!/^[a-z0-9_]{3,20}$/.test(u))return loginUI("Username: 3-20 letters, numbers or _");
+if(u==OWNER){if(AM=="reg")return loginUI("That username is reserved");if(await sha(OS+p)!=OH)return loginUI("Wrong username or password");ME=u;OWN=1;sess();return owner()}
+if(AM=="reg"&&p.length<6)return loginUI("Password must be at least 6 characters");
+const db=await DBT();if(!db)return loginUI("The online database is not set up yet. Ask the owner.");
+try{const d=db.doc("users/"+u),x=await d.get(),sl=Math.random().toString(36).slice(2,10);
+if(AM=="reg"){if(x.exists)return loginUI("Username already taken");await d.set({s:sl,h:await sha(sl+p)})}
+else{const v=x.exists&&x.data();if(!v||v.h!=await sha(v.s+p))return loginUI("Wrong username or password")}
+ME=u;OWN=0;LOC=0;sess();setup()}catch(e){loginUI("Could not reach the database ("+(e.code||"error")+"). Check your internet connection.")}}
+function logout(){ME=null;OWN=0;sess();loginUI()}
+let UNS=null,CODE=null,CT=0,DP=null;
+function dayUI(m){$("app").innerHTML=`<h1>🔑 Day passcode</h1><p class="sub">Your account has a special day passcode. Choose how to start:</p><div class="card"><label>Option 1 – Enter your day passcode</label><input id="dp" maxlength="12" placeholder="Day passcode" style="font-size:22px;text-align:center"><div class="err">${m||""}</div><button class="btn p" style="width:100%;margin-top:10px" onclick="vd()">Start game</button></div><div class="card"><label>Option 2 – Send a request to the owner</label><button class="btn" style="width:100%" onclick="ask2()">📨 Send request to owner</button></div><button class="btn" style="width:100%" onclick="setup()">Cancel</button>`}
+async function ask2(){ask(await DBP)}
+async function vd(){if(!DP||DP.exp<Date.now())return dayUI("This passcode has expired.");if(++TR>8)return dayUI("Too many tries.");if(await sha(DP.s+$("dp").value.trim())!=DP.h)return dayUI("Wrong passcode");go()}
+function stopW(){if(UNS){try{UNS()}catch(e){}UNS=null}CODE=null}
+async function start(){if(!ME)return loginUI();for(const r of Object.keys(PLAY))if(S.n*needs(r)>P[r].length){warn=`Not enough ${RN[r]} for ${S.n} teams of ${S.size}. Reduce teams or squad size.`;return setup()}
+warn="";stopW();const db=await DBT();if(!db){warn="Could not reach the shared database – check your connection and try again.";return setup()}
+TR=0;try{const x=await db.doc("daypass/"+ME).get();if(x.exists&&x.data().exp>Date.now()){DP=x.data();return dayUI()}}catch(e){}
+return ask(db)}
+async function ask(db){CUR=Date.now().toString(36)+Math.random().toString(36).slice(2,6);TR=0;
+try{await db.doc("req/"+CUR).set({u:ME,t:Date.now(),st:"pending"})}catch(e){warn="Could not send the request ("+(e.code||"error")+").";return setup()}
+waitUI("Waiting for the owner to accept your request…");let shown=0;
+UNS=db.doc("grants/"+CUR).onSnapshot(sn=>{if(!sn.exists||shown)return;const v=sn.data();
+if(v.st=="rejected"){shown=1;stopW();waitUI("❌ The owner rejected your request.",1)}
+else if(v.st=="ok"){shown=1;CODE=String(v.c);CT=v.t;codeUI()}},()=>{})}
+function waitUI(m,end){$("app").innerHTML=`<h1>🔐 Owner approval</h1><div class="card" style="text-align:center"><div style="font-size:42px">${end?"🚫":"⏳"}</div><b>${m}</b><div class="row"><button class="btn" onclick="stopW();setup()">${end?"Back":"Cancel"}</button>${end?'<button class="btn p" onclick="start()">Ask again</button>':""}</div></div>`}
+function codeUI(m){$("app").innerHTML=`<h1>✅ Owner accepted</h1><p class="sub">Your one-time passcode (shown only once, valid 5 minutes):</p><div class="card" style="text-align:center"><div class="price" style="letter-spacing:8px">${CODE||"------"}</div><input id="pc" inputmode="numeric" maxlength="6" value="${CODE||""}" style="font-size:22px;text-align:center;letter-spacing:6px;margin-top:10px"><div class="err">${m||""}</div><button class="btn p" style="width:100%;margin-top:10px" onclick="vc()">Start game</button><button class="btn" style="width:100%;margin-top:8px" onclick="stopW();setup()">Cancel</button></div>`}
+function vc(){const c=$("pc").value.trim();if(!CODE)return waitUI("This passcode was already used. Ask again.",1);if(++TR>5){stopW();return waitUI("Too many wrong tries.",1)}
+if(Date.now()-CT>3e5){stopW();return waitUI("Passcode expired.",1)}if(c!=CODE)return codeUI("Wrong passcode");stopW();go()}
+async function saveDP(){const db=await DBP,u=$("dpu").value.trim().toLowerCase(),p=$("dpp").value.trim();if(!/^[a-z0-9_]{3,20}$/.test(u)||p.length<4)return alert("Enter a username and a passcode of 4-12 characters");const sl=Math.random().toString(36).slice(2,10),exp=Date.now()+864e5;try{await db.doc("daypass/"+u).set({s:sl,h:await sha(sl+p),exp});await db.doc("daypassp/"+u).set({p,exp});$("dpp").value="";$("dpu").value=""}catch(e){alert("Could not save ("+(e.code||"error")+"). Check your internet connection.")}}
+async function delDP(u){const db=await DBP;try{await db.doc("daypass/"+u).delete();await db.doc("daypassp/"+u).delete()}catch(e){alert("Could not remove")}}
+async function decide(id,ok){const db=await DBP;try{if(ok)await db.doc("grants/"+id).set({st:"ok",c:String(100000+(crypto.getRandomValues(new Uint32Array(1))[0]%900000)),t:Date.now()});else await db.doc("grants/"+id).set({st:"rejected",t:Date.now()});await db.doc("req/"+id).update({st:ok?"ok":"rejected"})}catch(e){alert("Could not save ("+(e.code||"error")+"). Check your internet connection.")}}
+async function annU(){const db=await DBP;try{await db.doc("meta/version").set({v:+$("uv").value,link:LINK});alert("Update notice sent.")}catch(e){alert("Could not save ("+(e.code||"error")+").")}}
+async function owner(){const db=await DBP;$("app").innerHTML=`<h1>👑 Owner panel</h1><p class="sub">Requests appear here the moment a player taps Start Auction. Keep this page open. <button class="btn" style="padding:4px 10px;font-size:12px" onclick="logout()">Log out</button></p><div class="card"><h2>🔑 Day passcodes</h2><div class="note" style="margin:-6px 0 10px">Set a passcode for an account for 24 hours. That account starts the game with it – no approval needed. Save again to change it, or remove it any time.</div><div class="grid"><input id="dpu" placeholder="Username" autocapitalize="none"><input id="dpp" placeholder="Passcode (4-12 characters)" maxlength="12"></div><div class="row"><button class="btn p" onclick="saveDP()">Save for 24 hours</button><button class="btn" onclick="$('dpp').value=String(100000+Math.floor(Math.random()*900000))">Generate</button></div><div id="dl"></div></div><div id="ol" class="card"><div class="note">Waiting for requests…</div></div><div class="card"><label>Announce an update to players</label><div class="note">This is version ${VER}. When you publish a newer version, enter its number so players see “Update available”.</div><div class="row"><input id="uv" type="number" min="1" value="${VER+1}"><button class="btn p" onclick="annU()">Announce</button></div></div>`;
+if(!db){$("ol").innerHTML='<div class="err">Online database not set up or unreachable.</div>';return}
+db.collection("daypassp").onSnapshot(sn=>{const a=sn.docs.map(d=>({u:d.id,...d.data()})).filter(x=>x.exp>Date.now());$("dl").innerHTML=a.map(x=>`<div class="lb"><div style="flex:1"><b>👤 ${x.u}</b><div class="note" style="margin:0">until ${new Date(x.exp).toLocaleString()}</div></div><b style="letter-spacing:3px">${x.p}</b><button class="btn" style="padding:6px 10px" onclick="$('dpu').value='${x.u}';$('dpp').value='${x.p}'">Edit</button><button class="btn r" style="padding:6px 10px" onclick="delDP('${x.u}')">Remove</button></div>`).join("")},()=>{});
+db.collection("req").onSnapshot(sn=>{const a=sn.docs.map(d=>({id:d.id,...d.data()})).filter(x=>x.u&&Date.now()-x.t<6e5).sort((x,y)=>y.t-x.t);
+$("ol").innerHTML=a.length?a.map(x=>`<div class="lb" style="flex-wrap:wrap"><div style="flex:1"><b>👤 ${x.u}</b><div class="note" style="margin:0">wants to start a game · ${new Date(x.t).toLocaleTimeString()}</div></div>${x.st=="pending"?`<div class="row" style="margin:0;width:100%"><button class="btn g" onclick="decide('${x.id}',1)">✅ Accept</button><button class="btn r" onclick="decide('${x.id}',0)">❌ Reject</button></div>`:`<span class="tag ${x.st=="ok"?"t-A":"t-R"}">${x.st=="ok"?"Accepted – code sent":"Rejected"}</span>`}</div>`).join(""):'<div class="note">Waiting for requests…</div>'},()=>{$("ol").innerHTML='<div class="err">Cannot read requests. Open this page as the artifact owner.</div>'})}
+const VER=2,LINK=location.href.split("#")[0];
+function updUI(){$("app").innerHTML=`<h1>🔄 Update available</h1><div class="card" style="text-align:center"><div style="font-size:42px">⬆️</div><b>A newer version of Cricket Auction is available.</b><div class="note">Update now to continue.</div><div class="row"><button class="btn p" onclick="location.reload()">Update now</button><button class="btn r" onclick="exitApp()">Exit</button></div></div>`}
+function exitApp(){$("app").innerHTML=`<div class="card" style="text-align:center;margin-top:40px"><div style="font-size:42px">👋</div><b>You have exited Cricket Auction.</b><div class="note">You can close this page.</div></div>`;try{window.close()}catch(e){}}
+async function boot(){let up=0;try{const db=await Promise.race([DBP,new Promise(r=>setTimeout(()=>r(null),4000))]);if(db){const x=await db.doc("meta/version").get();if(x.exists&&+x.data().v>VER)up=1}}catch(e){}
+if(up)return updUI();ME?(OWN?owner():setup()):loginUI()}
+boot();
+</script></body></html>
